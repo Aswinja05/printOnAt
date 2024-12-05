@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../single logo no bg.png">
+    <title>PaperDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <!-- <div class="ham">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    </div> -->
+    <div class="back_arrow" onclick="goBack()"><img src="../imgs/back-arrow-navigation-svgrepo-com.svg" alt="" srcset=""></div>
+    <div class="brand_logo"> <img src="../imgs/logo-transparent-svg.svg" alt="" srcset=""> </div>
+    <!-- <div class="brand_name">PaperDash</div> -->
+
+
+    <div class="login-form">
+        <form>
+            <input type="text" name="" class="form_ip" placeholder="Email Id" id="phoneNo">
+            <button class="requestOtp" onclick="event.preventDefault(); requestOTP()">Request OTP</button>
+            <input type="text" class="form_ip" placeholder="OTP" id="otp">
+
+
+            
+            <!-- <input class="form_ip" name="cars" id="cars" form="carform" placeholder="Select your College">
+                <option value="volvo">CMRIT</option>
+            </input> -->
+
+            <button class="login" type="submit" onclick="event.preventDefault(); verifyOTP()">Login </button>
+            <!-- <span>First Time? <a href="">Register</a></span> -->
+            <div id="newUserFields" style="display: none;">
+                <input type="text" name="name" placeholder="Name" id="name"><br>
+                <input type="text" name="phone" placeholder="Phone Number" id="phone"><br>
+                <button type="button" onclick="event.preventDefault(); saveNewUser()">Save Details</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+<script src="/authentication/script.js"></script>
+
+</html>3

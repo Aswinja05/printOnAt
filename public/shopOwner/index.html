@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParperDash</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="so_brand_logo"> <img class="so_brand_img" src="../imgs/logo-transparent-svg-cropped.svg"
+            background="transparent" alt="" srcset="">
+            <div class="so_brand_name">PrintOnAt<span>Print On Anytime At Anywhere</span></div>
+    </div>
+    <form action="" class="deliverForm">
+        <input class="deliverFormIp" placeholder="Enter Delivery Code">
+        <div class="deliverFormBtn">Deliver</div>
+    </form>
+    <div class="so_navbar">
+        <li>Active Orders</li>
+        <li onclick="openDashboard()">Dashboard</li>
+        <li>Order History</li>
+    </div>
+
+    <div class="active_orders_div">
+        <!-- <div class="active_orders"> 
+           <p>File Name:<span>file-1728304311626-682628286.jpg</span></p>
+            <p>Path:<span>uploads\file-1728304311626-682628286.jpg</span></p>
+            <p>File Size:<span>66833</span></p>
+            <div class="active_orders_settings">
+                <img class="bnw" src="../imgs/palette-print-svgrepo-com.svg" alt="" srcset="">
+                <img class="landscape" src="../imgs/document-landscape-svgrepo-com.svg" alt="" srcset="">
+                <div class="copies">1</div>
+            </div>
+            <div class="active_orders_btn">Mark as Done</div> 
+       </div> -->
+    </div>
+    <div class="dashboard">
+        <div class="dashboardText">Your Dashboard</div>
+        <div class="closeBtn" onclick="openDashboard()">X</div>
+        <div class="dashboardSettings">
+        <div class="priceSettings">
+            <div class="dashboardTitle">Price Per Sheet</div>
+            <div class="subCont">
+            <div class="dashboardSubText">Colour Print</div><input type="number" class="priceInput"
+            value="10"><span>/-</span>
+            <div class="dashboardSubText">Monochrome Print</div><input type="number" class="priceInput"
+            value="5"><span>/-</span>
+        </div>
+        </div>
+        <div class="colorAvailability">
+            <div class="dashboardTitle">Available Colors</div>
+            <div class="subCont">
+            <img class="availablityImgs" src="../imgs/palette-print-svgrepo-com.svg" alt="" srcset="" style="height: 40px;">
+            <img class="availablityImgs" src="../imgs/palette-print-svgrepo-com (1).svg" alt="" srcset="" style="height: 40px;">
+        </div>
+
+        </div>
+    </div>
+        <div class="dashboardBtn">Apply Changes</div>
+    </div>
+
+</body>
+<script src="/shopOwner/script.js"></script>
+
+</html>

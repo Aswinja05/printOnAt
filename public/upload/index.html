@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintOnAt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="outlet_display_cont">
+        <div class="back_arrow" onclick="goBack()"><img src="../imgs/back-arrow-navigation-svgrepo-com.svg" alt=""
+                srcset=""></div>
+        <div class="outlet_details">Select a PrintOutlet</div>
+        <!-- <div class="search_icon"><img src="../imgs/search-alt-2-svgrepo-com.svg" alt="" srcset=""></div> -->
+    </div>
+    <!-- <div class="popUp">
+        <div class="popUp_mainText">Sorry!</div>
+        <div class="popUp_subText">We accept only Single file for now</div>
+    </div> -->
+    <div class="upload_container">
+        <div class="upload_files_cont">
+            <div class="upload_img"> <img src="../imgs/file-upload-svgrepo-com.svg" backgound="transparent" alt=""
+                    srcset=""> </div>
+            <!-- <div class="upload_sub_text">Maximum file size: 50MB</div> -->
+            <div class="upload_sub_text">Accepted Formats: pdf , jpg , png , svg</div>
+            <input type="file" id="fileInput" name="myFile" class="fileUpload">
+            <div class="files_settings_cont">
+                Print Settings
+                <span>Same print settings apply to all documents</span>
+                <div class="settings_sub_div">
+                    <div class="print_color_div">
+                        <img class="bnw" src="../imgs/palette-print-svgrepo-com.svg" alt="" srcset=""><span
+                            class="settings_caption">Monochrome</span>
+                        <img class="color" src="../imgs/palette-print-svgrepo-com (1).svg" alt="" srcset=""><span
+                            class="settings_caption">Color</span>
+                    </div>
+                    <div class="print_orientation_div">
+                        <img class="potrait" src="../imgs/document-svgrepo-com.svg" alt="" srcset=""><span
+                            class="settings_caption">Potrait</span>
+                        <img class="landscape" src="../imgs/document-landscape-svgrepo-com.svg" alt="" srcset=""><span
+                            class="settings_caption">Landscape</span>
+                    </div>
+                </div>
+
+                <div class="print_copies_div">
+                    <span>Choose number of copies</span>
+                    <div class="input-group">
+                        <button id="decrement">-</button>
+                        <input type="number" id="input" value="1" readonly>
+                        <button id="increment">+</button>
+                    </div>
+                </div>
+                <div class="print_both_sides">
+                    <span>Print on Both Sides</span>
+                    <input type="checkbox" id="myCheckbox" name="myCheckbox" value="checked" class="printBothSides_ip">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="upload_extra_files">
+        <img src="../imgs/add-file-8-svgrepo-com (4).svg" alt="" srcset="">
+    </div>
+    <!-- <button >Login</button> -->
+
+
+    </div>
+
+    <div class="price_summary_cont">
+        <div class="price_summary_cont_left">
+            <div class="no_of_pages">Total 0 pages</div>
+            <div class="total_price"><b>0/-</b></div>
+        </div>
+        <div class="checkout_btn">Checkout</div>
+    </div>
+
+    <div id="loading" style="display: none;">Preparing your files, please wait...</div>
+
+
+
+</body>
+<script src="/upload/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.8.0/dist/pptxgen.bundle.js"></script>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../imgs/single logo no bg.png">
+    <title>ParperDash</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <script src="https://kit.fontawesome.com/dedd5e47d2.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+
+    <div class="brand_logo"> <img src="../imgs/logo-transparent-svg.svg" background="transparent" alt="" srcset="">
+    </div>
+    <div class="nearby">
+        <div class="ham">
+            <i class="fa fa-bars fa-1x" aria-hidden="true"></i>
+        </div>
+        <div class="ham_cont">
+            <i class="xmark">X</i>
+            <li class="ham_list">
+                <div class="ham_logInBtn" href="/login">Sign in</div>
+            </li>
+            <li class="ham_list">Search for PrintOutlets</li>
+            <li class="ham_list" onclick="window.location.href='/history'">Order History</li>
+            <li class="ham_list" onclick="ham_cont[0].style.display = 'none'"><a href="#aboutSection">About Us</a> </li>
+            <li class="ham_list" onclick="ham_cont[0].style.display = 'none'"><a href="#joinSection">Join Us</a></li>
+            <li class="ham_list" onclick="showContacts()">Contact Us</li>
+            <ul class="contactList">
+                <li><i class="fa-solid fa-phone"></i>+91 9988776655</li>
+                <li><i class="fa-solid fa-envelope"></i>queries@printaton.com</li>
+            </ul>
+        </div>
+        <div class="logInBtn" href="/login">Sign in</div>
+        <div class="search_bar">
+            <img src="../imgs/search-alt-2-svgrepo-com.svg" alt="" srcset="">
+            <input placeholder="Search For PrintOutlets" onclick="openSearchCont()">
+        </div>
+        <div class="nearby_text">Nearby Outlets!</div>
+        <!-- <div class="nearby_list">
+            OOPS! Couldn't Find any nearby Outlet
+        </div> -->
+        <!--<div class="nearby_list">
+            <img src="../imgs/fdroid-nearby-svgrepo-com.svg" width="5%" srcset="">
+            <div class="nearby_name">Mookambika Cyber Cafe<pre>0.5m</pre>
+                <span>Kundalahalli gate,Marathahalli,Bangalore-25</span>
+            </div>
+            <img class="dir_img" src="../imgs/direction-gps-location-map-navigation-pin-svgrepo-com.svg" width="5%" srcset="">
+        </div>
+        <div class="nearby_list">
+            <img src="../imgs/fdroid-nearby-svgrepo-com.svg" width="5%" srcset="">
+            <div class="nearby_name">Shankar stationaries<pre>0.9m</pre>
+                <span>near brookfield mall,IT park road,Bangalore-25</span>
+            </div>
+            <img class="dir_img" src="../imgs/direction-gps-location-map-navigation-pin-svgrepo-com.svg" width="5%" srcset="">
+        </div>  -->
+    </div>
+    <div class="upload_files_cont">
+        <div class="upload_img"> <img src="../imgs/file-upload-svgrepo-com.svg" backgound="transparent" alt=""
+                srcset=""> </div>
+        <div class="upload_text">Select PrintOutlet before Uploading!</div>
+        <div class="upload_sub_text">Maximum file size: 50MB</div>
+        <div class="uploadButton">Upload your files</div>
+    </div>
+
+    <div id="aboutSection" class="aboutUs_cont">
+        <div class="aboutUs_text">About Us</div>
+        <img src="../imgs/Designer.png" class="aboutUs_img" style="width: 95%;">
+
+        <p>
+            Have you ever faced the hassle of crowded printer shops, waiting endlessly, or the struggle of sending
+            documents via email or WhatsApp just to get them printed? We understand the frustration—and that's why we
+            created <b>PrintOnAt</b>, your seamless printing companion. With PrintOnAt, you can upload your files
+            directly on
+            our platform, specify your preferences such as paper type, size, and color, and select a nearby printer shop
+            that is most convenient for you. You can even pay online, eliminating the need to fumble with cash. That’s
+            it! Simply pick up your prints at your selected shop and get back to your work or class without delay.
+            <br><b>PrintOnAt</b>: Printing Made Effortless.
+        </p>
+    </div>
+
+    <div id="joinSection" class="aboutUs_cont">
+        <!-- <div class="joinUs_cont"> -->
+        <div class="joinUs_text">Why Join Us ?</div>
+
+        <p>
+            Running a printer shop can be challenging—managing files from multiple platforms, handling a crowded shop,
+            and keeping customers happy. Printonat is here to solve these issues and make your business more efficient
+            and stress-free. We offer centralized file management, so you no longer need to search through emails or
+            WhatsApp for customer files. All orders are organized and easily accessible on our platform. Additionally,
+            Printonat helps reduce customer loss by
+            allowing customers to place orders online and pick them up when ready, avoiding long lines and frustration.
+            Join Printonat and focus on what you do best—delivering quality prints—while we handle
+            the rest. Together, we’ll help your business grow and run smoothly. <br><a>Contact us</a> to be a part of
+            the change
+        </p>
+        <img src="../imgs/Designer (1).png" class="aboutUs_img" style="width: 95%;">
+    </div>
+
+    <div class="search_cont">
+        <div class="search_cont_slide" onclick="pullDown()"></div>
+        <div class="search_bar"><img src="../imgs/search-alt-2-svgrepo-com.svg" background="transparent" alt=""
+                srcset=""><input type="text" id="locationInput" placeholder="Search for a PrintOutlet"
+                autocomplete="off"></div>
+        <div id="suggestions" class="suggestions-list"></div>
+        <div id="mapid"></div>
+    </div>
+    <footer>
+        <h2 class="logo-text">PrintOnAt</h2>
+        <p> Simplifying your printing needs. Upload your files, specify your preferences, and pick up your prints at a
+            nearby shop. Printing made effortless. </p>
+        <div class="socials"> <a href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i
+                    class="fab fa-twitter"></i></a> <a href="#"><i class="fab fa-instagram"></i></a> <a href="#"><i
+                    class="fab fa-linkedin"></i></a> </div>
+        <div class="footer-bottom"> &copy; printonat.com | Designed by PrintOnAt Team </div>
+    </footer>
+</body>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="/main/script.js"></script>
+
+</html>

@@ -357,7 +357,7 @@ app.post('/checkout', upload.single('file'), async (req, res) => {
 
 
 
-        
+
         let normalPayLoad = {
             merchantId: MERCHANT_ID, //* PHONEPE_MERCHANT_ID . Unique for each account (private)
             merchantTransactionId: merchantTransactionId,
@@ -475,7 +475,7 @@ app.get("/payment/validate/:merchantTransactionId", async function (req, res) {
     }
 });
 
-{/* <meta http-equiv="refresh" content="3;url=/main" />  */}
+{/* <meta http-equiv="refresh" content="3;url=/main" />  */ }
 
 
 app.post('/shopowner/:shopownerid', upload.none(), async (req, res) => {
@@ -887,6 +887,35 @@ app.get('/orderHistory/:cId', async (req, res) => {
     const data = await File.find({ cId: cId });
     res.send(data)
 })
+
+
+
+app.post('/verify-so', async (req, res) => {
+    const { sid, pw } = req.body;
+    if (!sid || !pw) {
+        return res.status(400).send(JSON.stringify('SID and Password are required'));
+    }
+
+
+    if (sid) {
+
+        const user = await PrintOutlet.findOne({ _id: sid });
+        if (!user) {
+            res.send(JSON.stringify({
+                message: 'User no found...Check the SID'
+            }));
+        }
+        else {
+            res.send(JSON.stringify({
+                message: 'SO verified successfully',
+                isLoggedIn: true,      
+                sId: sid
+            }));
+        }
+    } else {
+        res.status(400).send(JSON.stringify('Invalid User'));
+    }
+});
 
 
 app.listen(PORT, () => {

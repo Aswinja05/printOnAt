@@ -1,8 +1,9 @@
 console.log("connected")
 // Number of copies increment and decrement
-const shopownerid = '1234';
+let shopownerid = '1234';
 const shopId = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1]
 console.log("ShopID:", shopId)
+shopownerid = shopId
 
 let cId;
 

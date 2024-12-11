@@ -1,8 +1,61 @@
+let sLoggedIn = false
+let sid;
+let soAuthCont = document.querySelectorAll('.soAuthCont')
 
-console.log("hi")
-
+if (sessionStorage.getItem('sLoggedIn') === 'true') {
+  sLoggedIn = true;
+  soAuthCont[0].style.display = "none"
+  sid = sessionStorage.getItem('sid')
+  console.log("SID:",sid)
+}
 
 const shopownerid = '1234';
+
+
+
+
+
+
+
+
+async function verifySO() {
+  const sid = document.getElementById('sid').value;
+  const pw = document.getElementById('pw').value;
+
+  if (!sid || !pw) {
+      alert('SID and Password are required');
+      return;
+  }
+
+  try {
+      const response = await fetch('/verify-so', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sid, pw })
+      });
+      const data = await response.json();
+      console.log(data)
+      if(data=="Invalid User"){
+          alert("Invalid User")
+      }
+      sessionStorage.setItem('sid',data.sId)
+      sessionStorage.setItem('sLoggedIn',true)
+      console.log("LoggedIn:",data.sId)
+      soAuthCont[0].style.display='none'
+  } catch (error) {
+      console.error('Error verifying User:', error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
 const activeOrdersDiv = document.querySelector('.active_orders_div');
 
 let deliverFormIp = document.querySelectorAll('.deliverFormIp')
@@ -85,7 +138,7 @@ availablityImgs[1].addEventListener('click',()=>{
   }
 })
 
-fetch(`/shopowner/${shopownerid}`)
+fetch(`/shopowner/${sid}`)
   .then(response => response.json())
   .then(data => {
     if (data.files && data.files.length > 0) {
@@ -187,7 +240,7 @@ fetch(`/shopowner/${shopownerid}`)
 
 
             const downloadLink = document.createElement('a');
-            fetch(`/files/${shopownerid}`)
+            fetch(`/files/${sid}`)
               .then(response => response.json())
               .then(data => {
                 console.log('Files received:', data.files);

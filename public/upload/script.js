@@ -243,10 +243,10 @@ async function pricePerFile(file, color) {
   }
 
   if (color === "Black n White") {
-    return counter * (numPages * bw_price);
+    return (counter * (numPages * bw_price)) + (0.05 * counter * (numPages * bw_price));
   }
   else {
-    return counter * (numPages * color_price)
+    return (counter * (numPages * color_price)) + (0.05 * counter * (numPages * color_price))
   }
 
 }
@@ -287,43 +287,89 @@ document.body.addEventListener('change', function (event) {
 
 
 const loadingDiv = document.getElementById('loading');
-checkout_btn[0].addEventListener('click', () => {
+
+checkout_btn[0].addEventListener('click', async () => {
   loadingDiv.style.display = 'block';
-  const file = fileInput.files;
-  if (isLoggedIn === false) {
-    alert('Please Log in before Checking Out')
-    window.location.href = '/login'
+  if(!shopownerid){
+    alert("Please select a PrintOutlet")
   }
+  if(!cId){
+    alert("Please Login to continue")
+  }
+  if (!isLoggedIn) {
+    alert('Please Log in before Checking Out');
+    window.location.href = '/login';
+    return;
+  }
+
+  const file = fileInput.files;
+  if (!file || file.length === 0) {
+    alert('Please select a file to upload.');
+    loadingDiv.style.display = 'none';
+    return;
+  }
+
   const formData = new FormData();
   for (let i = 0; i < file.length; i++) {
-    formData.append('file', file[i]); // The name 'files' should match the multer configuration
+    formData.append('file', file[i]);
   }
-  console.log("Inside checlout:", cId)
-  formData.append('cId', cId)
-  formData.append('file', file);
+
+  formData.append('cId', cId);
   formData.append('shopownerid', shopownerid);
   formData.append('color_settings', print_color_settings);
   formData.append('orientation_settings', print_orientation_settings);
   formData.append('print_copies', counter);
-  formData.append('amt', totalPrice)
-  // Send the file to the server using fetch
-  fetch('/checkout', {
-    method: 'POST',
-    body: formData
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data); 
-      loadingDiv.style.display = 'none'; // Hide the loading message 
-      let url = data.url; 
-      console.log(url); 
-      window.location.href = url;
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      loadingDiv.style.display = 'none';
-      alert('File upload failed');
+  formData.append('amt', totalPrice);
+
+  try {
+    const response = await fetch('/checkout', {
+      method: 'POST',
+      body: formData,
     });
+
+    const data = await response.json();
+
+    if (!data.orderId) {
+      throw new Error('Failed to create order');
+    }
+
+    // Initiate Razorpay payment
+    const options = {
+      key: data.key, // Razorpay API Key
+      amount: data.amount, // Amount in paise
+      currency: data.currency,
+      name: "PrintAtOn",
+      description: "Order Payment",
+      order_id: data.orderId, // Razorpay Order ID
+      handler: async (paymentResponse) => {
+        // Validate payment on the backend
+        const validateResponse = await fetch(`/payment/validate/${paymentResponse.razorpay_order_id}`);
+        if (validateResponse.ok) {
+          alert('Payment successful!');
+          window.location.href = '/main'; // Redirect to the main page
+        } else {
+          alert('Payment validation failed.');
+        }
+      },
+      prefill: {
+        name: "Customer Name",
+        email: "customer@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#528FF0",
+      },
+    };
+
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+
+    loadingDiv.style.display = 'none'; // Hide loading spinner
+  } catch (error) {
+    console.error('Error:', error);
+    loadingDiv.style.display = 'none';
+    alert('Checkout failed. Please try again.');
+  }
 });
 
 

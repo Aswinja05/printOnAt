@@ -21,6 +21,7 @@ const shopownerid = '1234';
 async function verifySO() {
   const sid = document.getElementById('sid').value;
   const pw = document.getElementById('pw').value;
+  console.log(sid,pw)
 
   if (!sid || !pw) {
       alert('SID and Password are required');
@@ -145,6 +146,7 @@ fetch(`/shopowner/${sid}`)
       console.log(data.files)
 
       data.files.forEach(file => {
+        if(file.payment){
         const filenameElement = document.createElement('p');
         filenameElement.textContent = `Filename:`;
         const filenameElement_cont = document.createElement('span');
@@ -285,6 +287,7 @@ fetch(`/shopowner/${sid}`)
 
             activeOrdersDiv.appendChild(fileContainer);
           });
+        }
       })
 
 
